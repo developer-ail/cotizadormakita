@@ -17,6 +17,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 use Mail;
 use Session;
+use App\SeguimientoCotizacion;
+use App\Cotizacion;
+
 
 class CotizacionesController extends Controller
 {
@@ -62,8 +65,33 @@ class CotizacionesController extends Controller
         $cotizaciones = DB::table('detalle_cotizacion')
         ->select('id','modelo','descripcion','cantidad','unidad','moneda','precio_unitario','precio_venta','total','created_at')
         ->where('id_cotizacion','=',$id)->get();
-        return view('cotizaciones.show',['cotizaciones' => $cotizaciones]);
 
+        $seguimiento = DB::table('seguimiento_cotizaciones as sc')
+        ->join('clientes as cli','sc.id_cliente','=','cli.id')
+        ->join('vendedores as v','sc.id_vendedor','=','v.id')
+        ->select('sc.id','sc.id_cot','cli.nombre as cliente','v.nombre as vendedor','sc.tipo_seguimiento as seguimiento','sc.comentarios','sc.fecha','sc.no_factura','sc.id_prod')
+        ->where('sc.id_cot',$id)
+        ->get();
+
+        return view('cotizaciones.show',[ 'cotizaciones' => $cotizaciones,'seguimiento' => $seguimiento, 'id_cot' => $id ]);
+
+    }
+
+    public function registrarSeguimiento(Request $request){
+        $id_cot = Cotizacion::where('id',$request->id_cot)->first();
+
+        $seguimiento = new SeguimientoCotizacion;
+        $seguimiento->id_cot = $id_cot->id;
+        $seguimiento->id_cliente = $id_cot->id_cliente;
+        $seguimiento->id_vendedor = $id_cot->id_vendedor;
+        $seguimiento->tipo_seguimiento = $request->tipo_seguimiento;
+        $seguimiento->comentarios = $request->comentarios;
+        $seguimiento->fecha = $request->fecha;
+        $seguimiento->no_factura = $request->no_factura;
+        $seguimiento->id_prod = $request->producto;
+        $seguimiento->save();
+
+        return Redirect::back()->with('message', 'Seguimiento agregado correctamente.');
     }
 
     public function imprimir(Request $request){

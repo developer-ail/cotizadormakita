@@ -63,5 +63,7 @@ Route::get('pedidos','PedidosController@levantar_pedido');
 
 Route::post('pedidos_post','PedidosController@hacer_pedido');
 
+Route::post('registrar_seguimiento','CotizacionesController@registrarSeguimiento');
+
 //Si la ruta no existe
 //Route::get('/{slug?}','HomeController@index');

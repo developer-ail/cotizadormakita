@@ -39,9 +39,10 @@
             <td>{{ $cli->razon_social }}</td>
             <td>{{ $cli->vendedor }}</td>
             <td>
-              <a href="{{URL::action('ClientesController@edit',$cli->id)}}"><button class="btn btn-info">Editar</button></a>
+              <a href="{{URL::action('ClientesController@show',$cli->id)}}"><button class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+              <a href="{{URL::action('ClientesController@edit',$cli->id)}}"><button class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
               @if(Auth::user()->tipo_usuario == 'admin')
-                <a href="#" data-target="#modal-delete-{{$cli->id}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
+                <a href="#" data-target="#modal-delete-{{$cli->id}}" data-toggle="modal"><button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
               @endif
             </td>
           </tr>

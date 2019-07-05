@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Cliente;
 use App\Vendedor;
 use DB;
+use App\Cotizacion;
 
 class ClientesController extends Controller
 {
@@ -85,7 +86,15 @@ class ClientesController extends Controller
   }
 
   //Metodo show para mostrar
-  public function show($id){
+  public function show(Request $request, $id){
+    
+    $cliente = Cliente::where('id',$id)->first();
+    $vendedor = Vendedor::where('id',$cliente->id_vendedor)->first();
+    $cotizaciones = Cotizacion::where('id_cliente',$cliente->id)->get();
+
+    //dd();
+
+    return view('clientes.show',['cliente'=>$cliente,'vendedor'=>$vendedor,'cotizaciones'=>$cotizaciones]);
 
   }
 
