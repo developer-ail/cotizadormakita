@@ -79,11 +79,10 @@
                     <p><strong>Descripción: </strong>{{$pro->descripcion}}</p>
                     <p><strong>Unidad: </strong>{{$pro->unidad}}</p>
                     <p><strong>Moneda: </strong>{{$pro->moneda}}</p>
-                    <p><strong>Precio Unitario: </strong><strong style="color:red; font-size:1.4em; text-decoration:line-through;">$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .35), 2, '.', ',')}}</strong> <strong style="font-size:1em; color: dimgrey;">| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</strong></p>
+                    <p><strong>Precio Unitario: </strong><strong style="color:red; font-size:1.4em; text-decoration:line-through;">$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .10), 2, '.', ',')}}</strong> <strong style="font-size:1em; color: dimgrey;">| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</strong></p>
                     <p><strong>Precio Promocional: </strong><strong style="color:#0097A7; font-size:1.4em;">$ {{ number_format($pro->precio_unitario, 2, '.', ',')}}</strong></p>
-                    <p><strong>Precio c/IVA: </strong><strong style="color:#0097A7; font-size:1.4em;">$ {{ number_format($pro->precio_venta, 2, '.', ',')}}</strong></p>
                     <p><strong>Cantidad: </strong>{{$pro->cantidad}}</p>
-                    <p><strong>Total: </strong><strong style="color:#0097A7; font-size:1.4em;">$ {{ number_format($pro->precio_venta * $pro->cantidad, 2, '.', ',')}}</strong></p>
+                    <p><strong>Total: </strong><strong style="color:#0097A7; font-size:1.4em;">$ {{ number_format($pro->precio_unitario * $pro->cantidad, 2, '.', ',')}}</strong></p>
                 </div>
             </div>
             @endforeach

@@ -89,6 +89,9 @@ class CotizacionesController extends Controller
         $seguimiento->fecha = $request->fecha;
         $seguimiento->no_factura = $request->no_factura;
         $seguimiento->id_prod = $request->producto;
+        if( $seguimiento->tipo_seguimiento == '3ra Llamada - Cierre de venta' ) {
+            $seguimiento->venta = 1;
+        }
         $seguimiento->save();
 
         return Redirect::back()->with('message', 'Seguimiento agregado correctamente.');

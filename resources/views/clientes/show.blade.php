@@ -68,7 +68,7 @@
                                 <td>{{ $item->fecha }}</td>
                                 <td>{{ $item->total }}</td>
                                 <td>{{ $item->folio }}</td>
-                                <td><a href="#"><button class="btn btn-primary btn-block">Detalles</button></a></td>
+                                <td><a href="{{URL::action('CotizacionesController@show',$item->id)}}"><button class="btn btn-primary btn-block">Detalles</button></a></td>
                             </tr>
                             @endforeach
                         </tbody>

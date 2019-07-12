@@ -36,10 +36,10 @@
         <i class="fa fa-info-circle"></i> <span>Papeletas</span>
       </a>
     </li>
-    <!-- <li>
+    <li>
       <a href="{{url('reportes')}}">
         <i class="fa fa-area-chart"></i> <span>Reportes</span>
         <small class="label pull-right bg-yellow">IT</small>
       </a>
-    </li> -->
+    </li>
 </ul>

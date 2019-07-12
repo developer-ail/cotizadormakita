@@ -154,34 +154,31 @@
                         <th scope="row">Precio comercial</th>
                         <th>
                             <!-- $ {{ number_format($pro->precio_unitario, 2, '.', ',')}} -->
-                            <strong style="color:red; font-size:1.4em; text-decoration:line-through;">$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .35), 2, '.', ',')}}</strong> <strong style="font-size:1em; color: dimgrey;">| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</strong></p>
+                            <strong style="color:red; font-size:1.4em; text-decoration:line-through;">$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .10), 2, '.', ',')}}</strong> <strong style="font-size:1em; color: dimgrey;">| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</strong></p>
                         </th>
                     </tr>
                     <tr>
                         <th>Precio Promocional</th>
                         <th>$ {{ number_format($pro->precio_unitario, 2, '.', ',')}}</th>
                     </tr>
-                    <tr>
-                        <th scope="row">Precio c/IVA</th>
-                        <th>$ {{ number_format($pro->precio_venta, 2, '.', ',')}}</th>
-                    </tr>
+                    
                     <tr>
                         <th>Cantidad</th>
                         <th>{{$pro->cantidad}}</th>
                     
-                    <th style="display:none">
-                        {!!Form::open(array('url'=>'modificarcant','method'=>'POST','autocomplete'=>'off','name'=>'formeditcant'))!!}
-                        {{ csrf_field() }}
-                            <input type="number" name="cantidad" placeholder="Indicar cantidad a modificar" class="form-control">
-                            <input type="hidden" name="id_prod" value="{{$pro->id}}">
-                            {{-- <input type="button" value="Procesar" class="btn btn-primary" onclick="enviarform1()"> --}}
-                            {{-- <input type="button" class="form-control btn-info" value="Modificar" onclick="enviar_cantidad()"> --}}
-                        {{ Form::close() }}
-                    </th>
+                        <th style="display:none">
+                            {!!Form::open(array('url'=>'modificarcant','method'=>'POST','autocomplete'=>'off','name'=>'formeditcant'))!!}
+                            {{ csrf_field() }}
+                                <input type="number" name="cantidad" placeholder="Indicar cantidad a modificar" class="form-control">
+                                <input type="hidden" name="id_prod" value="{{$pro->id}}">
+                                {{-- <input type="button" value="Procesar" class="btn btn-primary" onclick="enviarform1()"> --}}
+                                {{-- <input type="button" class="form-control btn-info" value="Modificar" onclick="enviar_cantidad()"> --}}
+                            {{ Form::close() }}
+                        </th>
                     </tr>
                     <tr>
                     <th>Sub total</th>
-                    <th>$ {{ number_format($pro->precio_venta * $pro->cantidad, 2, '.', ',')}}</th>
+                    <th>$ {{ number_format($pro->precio_unitario * $pro->cantidad, 2, '.', ',')}}</th>
                     <th>
                         {!!Form::open(array('url'=>'eliminaritem','method'=>'POST','autocomplete'=>'off'))!!}
                             {{ csrf_field() }}

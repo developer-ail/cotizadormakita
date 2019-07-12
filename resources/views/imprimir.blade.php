@@ -100,11 +100,10 @@
                     <span><strong>Descripción: </strong>{{$pro->descripcion}}</span><br>
                     <span><strong>Unidad: </strong>{{$pro->unidad}}</span><br>
                     <span><strong>Moneda: </strong>{{$pro->moneda}}</span><br>
-                    <span><strong>Precio Unitario: </strong>$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .35), 2, '.', ',')}}| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</span><br>
+                    <span><strong>Precio Unitario: </strong>$ {{ number_format($pro->precio_unitario + ($pro->precio_unitario * .10), 2, '.', ',')}}| PRODUCTO CON DESCUENTO ESPECIAL DE TEMPORADA</span><br>
                     <span><strong>Precio Promocional: </strong><strong style="text-decoration: line-through; color: red;">$ {{ number_format($pro->precio_unitario, 2, '.', ',')}}</strong></span><br>
-                    <span><strong>Precio c/IVA: </strong><strong>$ {{ number_format($pro->precio_venta, 2, '.', ',')}}</strong></span><br>
                     <span><strong>Cantidad: </strong>{{$pro->cantidad}}</span><br>
-                    <span><strong>Total: </strong><strong>$ {{ number_format($pro->precio_venta * $pro->cantidad, 2, '.', ',')}}</strong></span><br>
+                    <span><strong>Total: </strong><strong>$ {{ number_format($pro->precio_unitario * $pro->cantidad, 2, '.', ',')}}</strong></span><br>
                 </div>
             </div>
             <br>

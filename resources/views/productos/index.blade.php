@@ -48,10 +48,7 @@
                     <th>Descripción</th>
                     <th>Unidad</th>
                     <th>Moneda</th>
-                    <th>P/Compra</th>
-                    <th>P/Unitario</th>
-                    <th>P/Venta</th>
-                    <th>Utilidad</th>
+                    <th>Precio Venta</th>
                     <th>Foto</th>
                     <th>Operaciones</th>
                 </thead>
@@ -63,11 +60,7 @@
                     <td>{{ $pro->descripcion }}</td>
                     <td>{{ $pro->unidad }}</td>
                     <th>{{ $pro->moneda}}</th>
-                    <th>{{ number_format($pro->precio_compra, 2, '.', ',')}}</th>
-                    <th>{{ number_format($pro->precio_unitario, 2, '.', ',')}}</th>
-                    <th>{{ number_format($pro->precio_venta, 2, '.', ',')}}</th>
-                    <th>{{ number_format($pro->utilidad, 2, '.', ',')}}</th>
-                    <!-- <th>{{ $pro->puntos}}</th> -->
+                    <th>$ {{ number_format($pro->precio_unitario, 2, '.', ',')}}</th>
                     <th>
                         @if( file_exists(public_path().'/imagenes/'.$pro->modelo.'.jpg'))
                             <img src="{{asset('imagenes').'/'.$pro->modelo.'.jpg'}}" class="img-responsive" style="width:100px">

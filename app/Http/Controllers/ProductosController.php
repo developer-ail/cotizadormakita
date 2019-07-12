@@ -25,16 +25,28 @@ class ProductosController extends Controller{
     }
 
     public function index(Request $request ){
-        //\Session::forget('item');
-        //\Session::forget('id_element');
-        if($request){
+        $categoria = $request->input('categoria');
+        //dd($categoria);
+
+        if($request->input('categoria')){
+            $query=trim($request->get('searchText'));
+            $productos=DB::table('productos')
+            ->where('modelo','LIKE','%'.$query.'%')
+            ->where('tipo',$categoria)
+            //->orwhere('descripcion','LIKE','%'.$query.'%')
+            ->orderBy('precio_venta','asc')
+            ->paginate(30);
+
+            //dd($productos);
+            return view('productos.index',["productos"=>$productos,"searchText"=>$query]);
+        }else{
             $query=trim($request->get('searchText'));
             $productos=DB::table('productos')
             ->where('modelo','LIKE','%'.$query.'%')
             ->orwhere('descripcion','LIKE','%'.$query.'%')
-            ->orwhere('isbn','LIKE','%'.$query.'%')
             ->orderBy('precio_venta','asc')
             ->paginate(30);
+
             return view('productos.index',["productos"=>$productos,"searchText"=>$query]);
         }
 
@@ -161,7 +173,7 @@ class ProductosController extends Controller{
                 if( \Session::get('item')){
                     $producto = \Session::get('item');
                     foreach($producto as $pro_session){
-                        $subtotal = $pro_session->precio_venta * $pro_session->cantidad;
+                        $subtotal = $pro_session->precio_unitario * $pro_session->cantidad;
                         $total = $total + $subtotal;
 
                     }
@@ -253,7 +265,7 @@ class ProductosController extends Controller{
         if( \Session::get('item') ){
             $producto = \Session::get('item');
             foreach($producto as $pro_session){
-                $subtotal = $pro_session->precio_venta * $pro_session->cantidad;
+                $subtotal = $pro_session->precio_unitario * $pro_session->cantidad;
                 $total = $total + $subtotal;
             }
         }else{
@@ -310,7 +322,7 @@ class ProductosController extends Controller{
             $detalle_cotizacion->moneda = $pro->moneda;
             $detalle_cotizacion->precio_unitario = $pro->precio_unitario;
             $detalle_cotizacion->precio_venta = $pro->precio_venta;
-            $detalle_cotizacion->total = $pro->precio_venta * $pro->cantidad;
+            $detalle_cotizacion->total = $pro->precio_unitario * $pro->cantidad;
             $detalle_cotizacion->save();
         }
 
@@ -328,7 +340,7 @@ class ProductosController extends Controller{
         if( \Session::get('item') ){
             $producto = \Session::get('item');
             foreach($producto as $pro_session){
-                $subtotal = $pro_session->precio_venta * $pro_session->cantidad;
+                $subtotal = $pro_session->precio_unitario * $pro_session->cantidad;
                 $total = $total + $subtotal;
             }
         }else{
@@ -379,7 +391,7 @@ class ProductosController extends Controller{
             $detalle_cotizacion->moneda = $pro->moneda;
             $detalle_cotizacion->precio_unitario = $pro->precio_unitario;
             $detalle_cotizacion->precio_venta = $pro->precio_venta;
-            $detalle_cotizacion->total = $pro->precio_venta * $pro->cantidad;
+            $detalle_cotizacion->total = $pro->precio_unitario * $pro->cantidad;
             $detalle_cotizacion->save();
         }
 
